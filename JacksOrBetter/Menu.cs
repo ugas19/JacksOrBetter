@@ -8,6 +8,7 @@ namespace JacksOrBetter
     {
         Program program;
         
+        //Read pressed key and change to other Game class
         public void StartMenu()
         {
             program = new Program();
@@ -17,8 +18,10 @@ namespace JacksOrBetter
             ConsoleKeyInfo keyinfo;
             do
             {
+                // Read pressed ket
                 keyinfo = Console.ReadKey();
                 Console.WriteLine(keyinfo.Key + " was pressed");
+                // If pressed Key is Enter changes class to main game class
                 if(keyinfo.Key == ConsoleKey.Enter) {
                     program.GameState(2);
                 }

@@ -10,7 +10,6 @@ namespace JacksOrBetter
         private int rank;
         private char type;
 
-
         public Card(string cardTitle, string cardName, string cardType,int cardRank)
         {
             title = cardTitle;
@@ -18,12 +17,18 @@ namespace JacksOrBetter
             type = cardType[0];
             rank = cardRank;
         }
+        //Returns string
         public string CardName => name;
 
+        //Returns char
         public char CardType => type;
+        //Returns int
         public int CardRank => rank;
+        //Returns string
         public string CardTitle => title;
+        //Class used outside to pick color by type
         public ConsoleColor CardColor() {
+            //Return Color for sertain type
              switch (CardType){
                 case'C':
                     return(ConsoleColor.DarkGray);

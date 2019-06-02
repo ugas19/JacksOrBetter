@@ -7,6 +7,7 @@ namespace JacksOrBetter
     class Cash
     {
         private int money;
+        //Returns and sets money
         public int Money
         {
             get => money;

@@ -17,20 +17,21 @@ namespace JacksOrBetter
         static private string holdText = "HOLD";
         static private string emptyText = "    ";
         string[] holdCurrentText = { emptyText, emptyText, emptyText, emptyText, emptyText };
-        //private int[] currentHoldState;
         Program program;
 
 
         public void StartGame()
         {
+            //Initiate Classes and five card list 
             money = new Cash();
             program = new Program();
             cardHolder = new List<Card>();
             deck = new Deck();
             evaluate = new Evaluate();
-            cards = new CardHolder(ConsoleColor.Red);
+            cards = new CardHolder();
+            //sets player money
             money.Money = 100;
-            
+            //
             PrintPayTable();
             Talk();
             while (true)
@@ -60,6 +61,7 @@ namespace JacksOrBetter
         }
         public void ChangeMoney(int amount)
         {
+            //Change int money.Money in 'Cash' Class  and reprint it
             money.Money = money.Money + amount; 
             Console.SetCursorPosition(0, moneyLine);
             Console.Write(new string(' ', Console.WindowWidth));
@@ -68,6 +70,7 @@ namespace JacksOrBetter
         }
         public void Talk()
         {
+            //take moneyLine as current line 
             moneyLine = Console.CursorTop;
             Console.WriteLine("                                                                                                                 Money: {0}",money.Money);
             Console.WriteLine("                                                      Press any key to start a new hand");
@@ -76,6 +79,9 @@ namespace JacksOrBetter
         }
         public void DealCards()
         {
+            //Fills List cardHolder with five cards from shuffled deck
+            //currentIndex is number of cards taked from deck
+            //currentIndex is emptied to start taking cards from top deck
             currentIndex = 0;
             cardHolder.Clear();
             deck.Shuffle();
@@ -85,12 +91,15 @@ namespace JacksOrBetter
                 currentIndex++;
 
             }
+            //Adds cards to CardHolder Class to start drawing
             cards.AddCards(cardHolder);
             cards.Draw();
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
         }
         public void DrawCards() {
+            //Fills List cardHolder with five cards from shuffled deck
+            //currentIndex is number of cards taked from deck
             for (int d = 0; d < 5; d++)
             {
                 if (holdCurrentText[d] == emptyText)
@@ -99,6 +108,7 @@ namespace JacksOrBetter
                     currentIndex++;
                 }
             }
+            //Adds cards to CardHolder Class to start drawing
             cards.AddCards(cardHolder);
             cards.Draw();
             Console.BackgroundColor = ConsoleColor.White;
@@ -107,6 +117,9 @@ namespace JacksOrBetter
         }
         public string Check()
         {
+            //Goes through class and checks card combinations
+            //Rerurns string of combination and adds money 
+            //if no combinations returns default string
             evaluate.GetCards(cardHolder);
             if (evaluate.CheckRoyalFlush()) return Pay("RoyalFlush");
             if (evaluate.CheckStraightFlush()) return Pay("StraightFlush");
@@ -121,7 +134,8 @@ namespace JacksOrBetter
         }
         public string Pay(string result)
         {
-            switch(result)
+            //Rerurns string of combination and adds money 
+            switch (result)
             {
                 case "Pair":
                     ChangeMoney(1);
@@ -167,12 +181,14 @@ namespace JacksOrBetter
         }
         public void SetCursor()
         {
+            //Sets cursor in needed line and empty it
             Console.SetCursorPosition(0, moneyLine + 1);
             DeleteLine(0);
 
         }
         public void DeleteLine(int lineAbove)
         {
+            //Sets cursor and empty line above
             int s = Console.CursorTop;
             Console.SetCursorPosition(0, s - lineAbove);
             Console.Write(new string(' ', Console.WindowWidth));
@@ -180,6 +196,7 @@ namespace JacksOrBetter
         }
         public void PickCard()
         {
+            //Read key and change text and state with given key info 
             holdCurrentText = new string[] { emptyText, emptyText, emptyText, emptyText, emptyText };
             Hold(5);
             do
@@ -213,7 +230,8 @@ namespace JacksOrBetter
         
         public void Hold(int state)
         {
-            
+            //Change Text and which card to Hold by given integer state
+            //print toggled text and empty above lines
             switch (state)
             {
                 case 0:

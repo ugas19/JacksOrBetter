@@ -7,7 +7,6 @@ namespace JacksOrBetter
 {
     class Deck
     {
-        //const string name = Two
         public Card[] card;
         private static Random rng = new Random();
         int index = 0;
@@ -15,6 +14,7 @@ namespace JacksOrBetter
         public  Deck()
         {
             deckForGame = new List<Card>();
+            //Make 52 cards for game with given details
             card = new Card[52];
             foreach (string name in new[] { "Clubs", "Spade", "Heart", "Diamo" })
             {
@@ -28,6 +28,7 @@ namespace JacksOrBetter
                 card[index++] = new Card("Ace  " + name, "A", name,14);
 
             }
+            //Add 52 cards to new list
            for(int s = 0; s < 52; s++)
             {
                 deckForGame.Add(card[s]);
@@ -36,6 +37,7 @@ namespace JacksOrBetter
         }
         public void Shuffle()
         {
+            //Shuffles 52 cards by random positions
             int n = deckForGame.Count;
             while (n > 1)
             {

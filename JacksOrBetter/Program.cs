@@ -8,10 +8,14 @@ namespace JacksOrBetter
     {
         public static Game  game;
         public static Menu menu;
+        private const int width = 133;
+        private const int height = 25;
+        //Main Class to start Game
         static void Main(string[] args)
         {
-
-            Console.SetWindowSize(Console.WindowWidth * 5 / 3, Console.WindowHeight);
+            //Set Window size to fit game
+            //Set characters and background color 
+            Console.SetWindowSize(width, height);
             Console.ForegroundColor = ConsoleColor.Black;
             Console.BackgroundColor = ConsoleColor.White;
             Console.Clear();
@@ -22,18 +26,17 @@ namespace JacksOrBetter
             
 
         }
+        //Changes sates by given integer sateID
         public void GameState(int stateID)
         {
             switch (stateID)
             {
                 case 1:
                     Console.Clear();
-                
                     menu.StartMenu();
                     break;
                 case 2:
-                    Console.Clear();
-                    
+                    Console.Clear();                   
                     game.StartGame();
                     break;
                 default:
